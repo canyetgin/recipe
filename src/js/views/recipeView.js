@@ -1,4 +1,5 @@
-import { icons } from '../../img/icons.svg';
+import icons from '../../img/icons.svg';
+import Fraction from 'fractional';
 class RecipeView {
   #parentElement = document.querySelector('.recipe');
   #data;
@@ -11,7 +12,7 @@ class RecipeView {
   #clear() {
     this.#parentElement.innerHTML = '';
   }
-  renderSpinner = function (parentEl) {
+  renderSpinner = function () {
     const markup = ` <div class="spinner">
     <svg>
       <use href="${icons}#icon-loader"></use>
@@ -85,7 +86,9 @@ class RecipeView {
               <svg class="recipe__icon">
                 <use href="${icons}#icon-check"></use>
               </svg>
-              <div class="recipe__quantity">${item.quantity}</div>
+              <div class="recipe__quantity">${new Fraction.Fraction(
+                item.quantity
+              )}</div>
               <div class="recipe__description">
                 <span class="recipe__unit">${item.unit}</span>
                 ${item.description}
