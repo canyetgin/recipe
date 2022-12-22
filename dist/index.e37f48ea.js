@@ -558,9 +558,11 @@ const renderSpinner = function(parentEl) {
     parentEl.insertAdjacentHTML("afterbegin", markup);
 };
 const showRecipie = async function() {
-    renderSpinner(recipeContainer);
     try {
-        const res = await fetch("https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886?key=2ec17f94-ed1a-497a-b37b-b6ff5a23ec2d");
+        const id = window.location.hash.slice(1);
+        if (!id) return; //guard class
+        renderSpinner(recipeContainer);
+        const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${id}`);
         const data = await res.json();
         if (!res.ok) throw new Error(`${data.message} ${res.status}`);
         let { recipe  } = data.data;
@@ -670,7 +672,13 @@ const showRecipie = async function() {
         alert(error.message);
     }
 };
-showRecipie();
+[
+    "hashchange",
+    "load"
+].forEach((e)=>{
+    window.addEventListener(e, showRecipie);
+    window.addEventListener(e, showRecipie);
+});
 
 },{"core-js/modules/es.regexp.flags.js":"gSXXb","core-js/modules/web.immediate.js":"49tUX","url:../img/icons.svg":"loVOp","regenerator-runtime/runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gSXXb":[function(require,module,exports) {
 var global = require("e582b638b801ab54");
