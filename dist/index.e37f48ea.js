@@ -553,13 +553,10 @@ const controlRecipes = async function() {
         alert(error.message);
     }
 };
-[
-    "hashchange",
-    "load"
-].forEach((e)=>{
-    window.addEventListener(e, controlRecipes);
-    window.addEventListener(e, controlRecipes);
-});
+const init = function() {
+    (0, _recipeViewJsDefault.default).addHandleRender(controlRecipes);
+};
+init();
 
 },{"core-js/modules/es.regexp.flags.js":"gSXXb","core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model.js":"Y4A21","./views/recipeView.js":"l60JC"}],"gSXXb":[function(require,module,exports) {
 var global = require("e582b638b801ab54");
@@ -2392,6 +2389,8 @@ parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadRecipe", ()=>loadRecipe);
 var _configJs = require("./config.js");
 var _helperJs = require("./helper.js");
+var _recipeViewJs = require("./views/recipeView.js");
+var _recipeViewJsDefault = parcelHelpers.interopDefault(_recipeViewJs);
 const state = {
     recipe: {}
 };
@@ -2414,7 +2413,7 @@ const loadRecipe = async function(id) {
     }
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./config.js":"k5Hzs","./helper.js":"lVRAz"}],"k5Hzs":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./config.js":"k5Hzs","./helper.js":"lVRAz","./views/recipeView.js":"l60JC"}],"k5Hzs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_URL", ()=>API_URL);
@@ -2477,6 +2476,14 @@ class RecipeView {
         this.#parentElement.innerHTML = "";
         this.#parentElement.insertAdjacentHTML("afterbegin", markup);
     };
+    addHandleRender(handler) {
+        [
+            "hashchange",
+            "load"
+        ].forEach((e)=>{
+            window.addEventListener(e, handler);
+        });
+    }
     #generateMarkup() {
         return `<figure class="recipe__fig">
           <img style ="transform:rotate(90deg); top:0" src="${this.#data.image}" alt="Tomato" class="${this.#data.title}" />
