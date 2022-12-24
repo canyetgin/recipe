@@ -1,8 +1,9 @@
 import View from './View.js';
-import icons from '../../img/icons.svg';
 
 class resultsView extends View {
   parentElement = document.querySelector('.results');
+  errorMessage = 'we couldnt find any recipe';
+  message = '';
 
   generateMarkup() {
     return this.data.map(this.generateMarkupPreview).join('');

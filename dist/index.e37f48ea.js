@@ -2537,9 +2537,7 @@ class RecipeView extends (0, _viewJsDefault.default) {
           </div>
 
           <div class="recipe__user-generated">
-            <svg>
-              <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
-            </svg>
+           
           </div>
           <button class="btn--round">
             <svg class="">
@@ -2602,6 +2600,7 @@ var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class View {
     data;
     render(data) {
+        if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
         this.data = data;
         const markup = this.generateMarkup();
         this.clear();
@@ -2971,10 +2970,10 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./View.js");
 var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
-var _iconsSvg = require("../../img/icons.svg");
-var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class resultsView extends (0, _viewJsDefault.default) {
     parentElement = document.querySelector(".results");
+    errorMessage = "we couldnt find any recipe";
+    message = "";
     generateMarkup() {
         return this.data.map(this.generateMarkupPreview).join("");
     }
@@ -2997,6 +2996,6 @@ class resultsView extends (0, _viewJsDefault.default) {
 }
 exports.default = new resultsView();
 
-},{"./View.js":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../img/icons.svg":"cMpiy"}]},["fA0o9","aenu9"], "aenu9", "parcelRequiree88c")
+},{"./View.js":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fA0o9","aenu9"], "aenu9", "parcelRequiree88c")
 
 //# sourceMappingURL=index.e37f48ea.js.map

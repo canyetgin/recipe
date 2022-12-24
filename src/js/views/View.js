@@ -2,6 +2,8 @@ import icons from '../../img/icons.svg';
 export default class View {
   data;
   render(data) {
+    if (!data || (Array.isArray(data) && data.length === 0))
+      return this.renderError();
     this.data = data;
     const markup = this.generateMarkup();
     this.clear();
