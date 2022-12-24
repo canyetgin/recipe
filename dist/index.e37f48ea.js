@@ -540,8 +540,11 @@ var _recipeViewJs = require("./views/recipeView.js");
 var _recipeViewJsDefault = parcelHelpers.interopDefault(_recipeViewJs);
 var _searchViewJs = require("./views/searchView.js");
 var _searchViewJsDefault = parcelHelpers.interopDefault(_searchViewJs);
+var _resultsViewJs = require("./views/resultsView.js");
+var _resultsViewJsDefault = parcelHelpers.interopDefault(_resultsViewJs);
 var _regeneratorRuntime = require("regenerator-runtime");
 const recipeContainer = document.querySelector(".recipe");
+if (module.hot) module.hot.accept();
 const controlRecipes = async function() {
     try {
         const id = window.location.hash.slice(1);
@@ -555,10 +558,11 @@ const controlRecipes = async function() {
 };
 const controlSearchResults = async function() {
     try {
+        (0, _resultsViewJsDefault.default).renderSpinner();
         const query = (0, _searchViewJsDefault.default).getQuery();
         if (!query) return;
         await _modelJs.loadSearchResults(query);
-        console.log(_modelJs.state.search.results);
+        (0, _resultsViewJsDefault.default).render(_modelJs.state.search.results);
     } catch (error) {
         console.log(error);
     }
@@ -569,7 +573,7 @@ const init = function() {
 };
 init();
 
-},{"core-js/modules/es.regexp.flags.js":"gSXXb","core-js/modules/web.immediate.js":"49tUX","./model.js":"Y4A21","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gSXXb":[function(require,module,exports) {
+},{"core-js/modules/es.regexp.flags.js":"gSXXb","core-js/modules/web.immediate.js":"49tUX","./model.js":"Y4A21","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/resultsView.js":"cSbZE"}],"gSXXb":[function(require,module,exports) {
 var global = require("fbf170b600cec3e");
 var DESCRIPTORS = require("7887a76ab6f26792");
 var defineBuiltInAccessor = require("b360989ab32e457f");
@@ -2962,6 +2966,37 @@ class SearchView {
 }
 exports.default = new SearchView();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fA0o9","aenu9"], "aenu9", "parcelRequiree88c")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cSbZE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _viewJs = require("./View.js");
+var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
+var _iconsSvg = require("../../img/icons.svg");
+var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
+class resultsView extends (0, _viewJsDefault.default) {
+    parentElement = document.querySelector(".results");
+    generateMarkup() {
+        return this.data.map(this.generateMarkupPreview).join("");
+    }
+    generateMarkupPreview(item) {
+        return `
+    <li class="preview">
+            <a class="preview__link preview__link--active" href="#${item.id}">
+              <figure class="preview__fig">
+                <img src="${item.image}" alt="Test" />
+              </figure>
+              <div class="preview__data">
+                <h4 class="preview__title">${item.title}</h4>
+                <p class="preview__publisher">${item.publisher}</p>
+                
+              </div>
+            </a>
+          </li>
+    `;
+    }
+}
+exports.default = new resultsView();
+
+},{"./View.js":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../img/icons.svg":"cMpiy"}]},["fA0o9","aenu9"], "aenu9", "parcelRequiree88c")
 
 //# sourceMappingURL=index.e37f48ea.js.map
