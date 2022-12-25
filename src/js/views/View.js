@@ -8,6 +8,7 @@ export default class View {
     this.clear();
     this.parentElement.insertAdjacentHTML('afterbegin', markup);
   }
+  
   clear() {
     this.parentElement.innerHTML = '';
   }
