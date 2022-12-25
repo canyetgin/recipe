@@ -2,8 +2,7 @@ import icons from '../../img/icons.svg';
 export default class View {
   data;
   render(data) {
-    if (!data || (Array.isArray(data) && data.length === 0))
-      return this.renderError();
+    if (!data || (Array.isArray(data) &&  data.length===0)) return this.renderError();
     this.data = data;
     const markup = this.generateMarkup();
     this.clear();
@@ -45,9 +44,5 @@ export default class View {
     this.clear();
     this.parentElement.insertAdjacentHTML('afterbegin', markup);
   }
-  addHandleRender(handler) {
-    ['hashchange', 'load'].forEach(e => {
-      window.addEventListener(e, handler);
-    });
-  }
+  
 }

@@ -6,7 +6,11 @@ class RecipeView extends View {
 
   errorMessage = 'we couldnt find it';
   message = '';
-
+  addHandleRender(handler) {
+    ['hashchange', 'load'].forEach(e => {
+      window.addEventListener(e, handler);
+    });
+  }
   generateMarkup() {
     return `<figure class="recipe__fig">
           <img style ="transform:rotate(90deg); top:0" src="${
